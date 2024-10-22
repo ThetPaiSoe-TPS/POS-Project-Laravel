@@ -1,0 +1,6 @@
+.rating{
+    display: none;
+}
+.label:hover{
+    cursor: pointer;
+}
