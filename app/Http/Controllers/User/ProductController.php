@@ -197,9 +197,17 @@ class ProductController extends Controller
             $file->move(public_path() . '/product/', $fileName);
             $product['image'] = $fileName;
         }
-            Product::create($product);
-            Alert::success('New Product', 'Created successfully');
-            return back();
+        $product = Product::create($product);
+
+        // Create action log with the product ID
+        ActionLog::create([
+            'user_id' => Auth::id(),
+            'post_id' => $product->id,  // Use the newly created product's ID
+            'action' => 'productCreated'
+        ]);
+
+        Alert::success('New Product', 'Created successfully');
+        return back();
     }
 
     //product list

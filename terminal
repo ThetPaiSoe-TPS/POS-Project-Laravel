@@ -1,0 +1,12 @@
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+chmod -R 775 storage bootstrap/cache
+php artisan config:clear
+php artisan cache:clear
+php artisan view:clear
+php artisan route:clear
+mkdir database
+type nul > database\database.sqlite
+php artisan db:seed 
